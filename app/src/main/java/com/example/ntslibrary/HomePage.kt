@@ -31,6 +31,10 @@ import com.example.ntslibrary.ui.theme.NTSLIBRARYTheme
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 
+import android.content.Intent
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.platform.LocalContext
+
 class HomePage : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -1013,6 +1017,7 @@ fun WelcomeCard() {
 
 @Composable
 fun QuickAccessSection() {
+    val context = LocalContext.current
     Column(
         Modifier
             .padding(horizontal = 16.dp)
@@ -1027,8 +1032,14 @@ fun QuickAccessSection() {
         )
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             QuickActionButton(
-                Icons.Outlined.MenuBook, "Browse Books", "Explore new reads", Modifier.weight(1f)
-            )
+                Icons.Outlined.MenuBook,
+                "Browse Books",
+                "Explore new reads",
+                Modifier.weight(1f)
+            ) {
+                val intent = Intent(context, Books::class.java)
+                context.startActivity(intent)
+            }
             QuickActionButton(
                 Icons.Outlined.EmojiEvents, "Earn Coins", "Complete tasks", Modifier.weight(1f)
             )
@@ -1052,12 +1063,15 @@ fun QuickActionButton(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     title: String,
     subtitle: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null
 ) {
     Card(
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFF7F8FE)),
-        modifier = modifier.height(100.dp)
+        modifier = modifier
+            .height(100.dp)
+            .let { if (onClick != null) it.clickable { onClick() } else it }
     ) {
         Column(
             Modifier
