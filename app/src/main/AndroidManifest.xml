@@ -18,6 +18,11 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.NTSLIBRARY"/>
         <activity
+            android:name=".PaymentActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.NTSLIBRARY"/>
+        <activity
             android:name=".Books"
             android:exported="false"
             android:label="@string/app_name"

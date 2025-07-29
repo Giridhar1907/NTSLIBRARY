@@ -1,5 +1,6 @@
 package com.example.ntslibrary
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,6 +35,7 @@ import androidx.compose.foundation.verticalScroll
 import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.ui.platform.LocalContext
+import kotlin.jvm.java
 
 class HomePage : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +50,10 @@ class HomePage : ComponentActivity() {
 
 @Composable
 fun MainScreenWithNavBar() {
-    var selectedItem by rememberSaveable { mutableStateOf(0) }
+    val context = LocalContext.current
+    val activity = context as? Activity
+    val initialTab = (activity?.intent?.getIntExtra("selectedTab", 0)) ?: 0
+    var selectedItem by rememberSaveable { mutableStateOf(initialTab) }
     val navItems = listOf(
         NavBarItem("Home", Icons.Outlined.Home),
         NavBarItem("Tasks", Icons.Outlined.Checklist),
@@ -641,6 +646,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
     var contactName by rememberSaveable { mutableStateOf("") }
     var contactEmail by rememberSaveable { mutableStateOf("") }
     var contactMsg by rememberSaveable { mutableStateOf("") }
+    val context = LocalContext.current
 
     Column(
         modifier
@@ -756,7 +762,12 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 ProfileSettingsRow(
                     icon = Icons.Outlined.Payment,
                     iconColor = Color(0xFFB88BF6),
-                    text = "Payments"
+                    text = "Payments",
+                    onClick = {
+                        context.startActivity(
+                            Intent(context, PaymentActivity::class.java)
+                        )
+                    }
                 )
                 Divider(modifier = Modifier.padding(start = 56.dp, end = 10.dp))
                 ProfileSettingsRow(
@@ -888,13 +899,15 @@ fun ProfileStatsCard(
 fun ProfileSettingsRow(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     iconColor: Color,
-    text: String
+    text: String,
+    onClick: (() -> Unit)? = null
 ) {
     Row(
         Modifier
             .fillMaxWidth()
             .height(52.dp)
-            .padding(start = 12.dp, end = 7.dp),
+            .padding(start = 12.dp, end = 7.dp)
+            .let { if (onClick != null) it.clickable { onClick() } else it },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
