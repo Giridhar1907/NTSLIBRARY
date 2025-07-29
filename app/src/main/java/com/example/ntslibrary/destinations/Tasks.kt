@@ -250,7 +250,7 @@ fun OutlinedTasksCardList(tasks: List<TaskCardData>, cardBorderColor: Color) {
             OutlinedCard(
                 shape = RoundedCornerShape(14.dp),
                 modifier = Modifier.fillMaxWidth(),
-                border = BorderStroke(1.dp, cardBorderColor)
+                border = BorderStroke(0.dp, cardBorderColor)
             ) {
                 Row(
                     Modifier

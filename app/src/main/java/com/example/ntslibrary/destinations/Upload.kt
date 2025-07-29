@@ -1,7 +1,9 @@
 package com.example.ntslibrary.destinations
 
+import android.R
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -40,7 +42,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.booleanResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -66,7 +70,7 @@ fun UploadScreen(modifier: Modifier = Modifier) {
         Text(
             "Upload Paper",
             modifier = Modifier.fillMaxWidth(),
-            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+            textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp
         )
@@ -77,7 +81,7 @@ fun UploadScreen(modifier: Modifier = Modifier) {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(12.dp),
-            border = BorderStroke(1.2.dp, Color(0xFFE2EDFC))
+            border = BorderStroke(0.dp, Color(0xFFE2EDFC))
         ) {
             Column(Modifier.padding(15.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -107,9 +111,13 @@ fun UploadScreen(modifier: Modifier = Modifier) {
         OutlinedCard(
             Modifier
                 .padding(horizontal = 16.dp)
-                .fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            border = BorderStroke(1.2.dp, Color(0xFFE2EDFC))
+                .fillMaxWidth()
+                .border(
+                    shape = RoundedCornerShape(12.dp),
+                    width = 1.dp,
+                    color = Color.Gray
+                ),
+            shape = RoundedCornerShape(12.dp)
         ) {
             Column(
                 Modifier
@@ -188,9 +196,13 @@ fun UploadScreen(modifier: Modifier = Modifier) {
         OutlinedCard(
             Modifier
                 .padding(horizontal = 16.dp)
-                .fillMaxWidth(),
-            shape = RoundedCornerShape(11.dp),
-            border = BorderStroke(1.dp, Color(0xFFE2EDFC))
+                .fillMaxWidth()
+                .border(
+                    shape = RoundedCornerShape(20.dp),
+                    width = 0.dp,
+                    color = Color.Gray
+                ),
+            shape = RoundedCornerShape(20.dp)
         ) {
             Column(Modifier.padding(horizontal = 12.dp, vertical = 13.dp)) {
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -278,7 +290,7 @@ fun LabeledTextField(
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
-            placeholder = { Text(placeholder, color = Color(0xFFBDC8DE), fontSize = 14.sp) },
+            placeholder = { Text(placeholder, color = Color.Gray, fontSize = 14.sp) },
             singleLine = singleLine,
             minLines = minLines,
             modifier = Modifier
@@ -287,7 +299,6 @@ fun LabeledTextField(
                 .defaultMinSize(minHeight = 45.dp),
             shape = RoundedCornerShape(10.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = Color(0xFFE2EDFC),
                 focusedBorderColor = Color(0xFF1678F2),
                 cursorColor = Color(0xFF1678F2)
             )

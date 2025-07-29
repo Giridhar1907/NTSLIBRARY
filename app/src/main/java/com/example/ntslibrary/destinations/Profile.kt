@@ -166,7 +166,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(14.dp),
-            border = BorderStroke(1.2.dp, Color(0xFFE2EDFC))
+            border = BorderStroke(1.dp, Color(0xFFE2EDFC))
         ) {
             Column(Modifier.padding(vertical = 2.dp)) {
                 ProfileSettingsRow(

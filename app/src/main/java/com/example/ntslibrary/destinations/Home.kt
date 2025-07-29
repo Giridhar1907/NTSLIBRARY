@@ -2,6 +2,7 @@ package com.example.ntslibrary.destinations
 
 import android.content.Intent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -42,6 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -175,7 +177,13 @@ fun AcademicProgressSection() {
                     .fillMaxHeight(),
                 elevation = CardDefaults.cardElevation(1.dp)
             ) {
-                Column(Modifier.fillMaxSize().padding(12.dp)) {
+                Column(Modifier
+                    .fillMaxSize()
+                    .padding(12.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                )
+                {
                     Text("Chapter Completion", fontWeight = FontWeight.Bold, fontSize = 12.sp)
                     Spacer(Modifier.height(6.dp))
                     LinearProgressIndicator(
@@ -201,8 +209,11 @@ fun AcademicProgressSection() {
                 elevation = CardDefaults.cardElevation(1.dp)
             ) {
                 Column(
-                    Modifier.fillMaxSize().padding(12.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    Modifier
+                        .fillMaxSize()
+                        .padding(12.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
                     Text("Engagement Score", fontWeight = FontWeight.Bold, fontSize = 12.sp)
                     Spacer(Modifier.height(10.dp))
@@ -246,9 +257,14 @@ fun RecommendedSection() {
                 Card(
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier
-                        .width(180.dp)
-                        .height(180.dp),
-                    elevation = CardDefaults.cardElevation(2.dp)
+                        .width(150.dp)
+                        .height(180.dp)
+                        .border(
+                            shape = RoundedCornerShape(12.dp),
+                            width = 1.dp,
+                            color = Color.Gray
+                        ),
+                    colors = CardDefaults.cardColors(Color.Transparent)
                 ) {
                     Column {
                         Box(
@@ -316,17 +332,23 @@ fun UpdatesSection() {
 
 @Composable
 fun QuickActionButton(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: ImageVector,
     title: String,
     subtitle: String,
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null
 ) {
     Card(
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(20.dp),
         modifier = modifier
             .height(100.dp)
             .let { if (onClick != null) it.clickable { onClick() } else it }
+            .border(
+                shape = RoundedCornerShape(20.dp),
+                color = Color.Gray,
+                width = 1.dp
+            ),
+        colors = CardDefaults.cardColors(Color.Transparent)
     ) {
         Column(
             Modifier
