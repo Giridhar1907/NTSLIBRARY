@@ -250,7 +250,6 @@ fun ExploreScreen(modifier: Modifier = Modifier) {
         modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(Color.White)
             .padding(bottom = 60.dp)
     ) {
         Spacer(Modifier.height(16.dp))
@@ -402,8 +401,7 @@ fun ExploreBookCard(book: ExploreBook, showCoin: Boolean = false) {
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .height(110.dp)
-                    .background(Color.LightGray),
+                    .height(110.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text("Cover", fontWeight = FontWeight.SemiBold, color = Color.DarkGray)
@@ -578,7 +576,6 @@ fun LibraryScreen(modifier: Modifier = Modifier) {
     Column(
         modifier
             .fillMaxSize()
-            .background(Color.White)
             .padding(horizontal = 0.dp)
     ) {
         Spacer(Modifier.height(28.dp))
@@ -610,7 +607,6 @@ fun LibraryItemRow(section: LibrarySection) {
         Icon(
             section.icon,
             contentDescription = null,
-            tint = Color(0xFF354052),
             modifier = Modifier.size(22.dp)
         )
         Spacer(modifier = Modifier.width(14.dp))
@@ -619,7 +615,6 @@ fun LibraryItemRow(section: LibrarySection) {
                 section.name,
                 fontWeight = FontWeight.Medium,
                 fontSize = 17.sp,
-                color = Color(0xFF202B3B)
             )
             Text(
                 section.info,
