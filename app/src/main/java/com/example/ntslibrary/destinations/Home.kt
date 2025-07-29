@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -257,8 +258,7 @@ fun RecommendedSection() {
                 Card(
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier
-                        .width(150.dp)
-                        .height(180.dp)
+                        .wrapContentSize()
                         .border(
                             shape = RoundedCornerShape(12.dp),
                             width = 1.dp,
@@ -266,29 +266,26 @@ fun RecommendedSection() {
                         ),
                     colors = CardDefaults.cardColors(Color.Transparent)
                 ) {
-                    Column {
-                        Box(
-                            Modifier
-                                .fillMaxWidth()
-                                .height(90.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                Icons.Outlined.MenuBook,
-                                contentDescription = null,
-                                tint = Color(0xFF8589A7),
-                                modifier = Modifier.size(36.dp)
-                            )
-                        }
-                        Column(Modifier.padding(horizontal = 10.dp, vertical = 12.dp)) {
-                            Text(
-                                book.title,
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = 14.sp,
-                                maxLines = 2
-                            )
-                            Text(book.author, fontSize = 12.sp, color = Color.Gray, maxLines = 1)
-                        }
+                    Column (
+                        modifier = Modifier.fillMaxSize()
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ){
+                        Icon(
+                            Icons.Outlined.MenuBook,
+                            contentDescription = null,
+                            tint = Color(0xFF8589A7),
+                            modifier = Modifier.size(36.dp)
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Text(
+                            book.title,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 14.sp,
+                            maxLines = 2
+                        )
+                        Text(book.author, fontSize = 12.sp, color = Color.Gray, maxLines = 1)
+
                     }
                 }
             }
